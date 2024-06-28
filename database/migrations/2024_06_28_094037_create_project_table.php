@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Lead;
+use App\Models\Leads;
 use App\Models\PaymentFile;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -20,11 +20,10 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('status')->nullable();
             $table->text('tech_file')->nullable();
-
-            $table->foreignIdFor(Lead::class)->nullable();
-//            $table->foreign('price_document_file')->references('id')->on('payment_files');
+            $table->foreignIdFor(Leads::class)->nullable();
             $table->timestamp('started_at')->nullable();
             $table->timestamp('ended_at')->nullable();
+            $table->foreignId('country_id')->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }
