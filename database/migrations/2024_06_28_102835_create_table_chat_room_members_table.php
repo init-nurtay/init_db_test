@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('project_services', function (Blueprint $table) {
+        Schema::create('table_chat_room_members', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('chat_room_id');
+            $table->unsignedBigInteger('user_id');
+            $table->string('status')->nullable(); //admin, member
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('project_services');
+        Schema::dropIfExists('table_chat_room_members');
     }
 };

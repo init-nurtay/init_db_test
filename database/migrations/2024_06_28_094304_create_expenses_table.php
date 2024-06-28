@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignIdFor(\App\Models\Project::class);
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->timestamp('income_date_at')->nullable();
+            $table->string('replay')->nullable();//every month, every year, every week
+            $table->unsignedInteger('amount')->nullable();
+            $table->string('status')->nullable();
         });
     }
 

@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('chat_rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('status')->nullable();
-            $table->string('type')->nullable();
-            $table->string('amount')->nullable();
+            $table->string('name');
+            $table->text('description');
             $table->foreignId('project_id')->constrained()->nullOnDelete();
-            $table->foreignId('supplier_id')->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('chat_rooms');
     }
 };
