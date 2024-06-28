@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('payment_files', function (Blueprint $table) {
             $table->id();
+            $table->text('file');
+            $table->string('type');
+            $table->string('mime_type');
+            $table->unsignedInteger('size');
+            $table->foreignIdFor(\App\Models\Payment::class)->nullable();
             $table->timestamps();
         });
     }
