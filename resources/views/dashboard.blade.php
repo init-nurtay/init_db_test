@@ -11,6 +11,21 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
                 </div>
+
+                <div class="p-6">
+                    <div>
+                        <a href="/leads">leads</a>
+                    </div>
+                    <div>
+                        <a href="/projects">projects</a>
+                    </div>
+                    <div>
+                        <a href="/tasks">tasks</a>
+                    </div>
+                    <div>
+                        <a href="/payments">payments</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
