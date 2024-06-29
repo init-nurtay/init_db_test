@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('incomes', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Project::class);
             $table->string('name');
             $table->text('description')->nullable();
-            $table->timestamp('income_date_at')->nullable();
             $table->string('replay')->nullable();//every month, every year, every week
+            $table->string('status')->nullable();//pending, completed
+            $table->string('type')->nullable();//income, expense
             $table->unsignedInteger('amount')->nullable();
-            $table->string('status')->nullable();
-            
+            $table->foreignId('project_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('supplier_id')->nullable()->constrained()->nullOnDelete();
+            $table->timestamp('transaction_date_at')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('incomes');
+        Schema::dropIfExists('transactions');
     }
 };

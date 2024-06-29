@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\Leads;
+use App\Models\Lead;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -19,7 +19,7 @@ class LeadPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Leads $lead)
+    public function view(User $user, Lead $lead)
     {
 //        return $user->role === 'manager';
     }
@@ -35,7 +35,7 @@ class LeadPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Leads $lead)
+    public function update(User $user, Lead $lead)
     {
 //        return $user->role === 'manager';
     }
@@ -43,7 +43,7 @@ class LeadPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Leads $lead)
+    public function delete(User $user, Lead $lead)
     {
 //        return $user->role === 'manager';
     }
@@ -51,7 +51,7 @@ class LeadPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Leads $lead)
+    public function restore(User $user, Lead $lead)
     {
 //        return $user->role === 'manager';
     }
@@ -59,7 +59,7 @@ class LeadPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Leads $lead)
+    public function forceDelete(User $user, Lead $lead)
     {
 //        return $user->role === 'manager';
     }

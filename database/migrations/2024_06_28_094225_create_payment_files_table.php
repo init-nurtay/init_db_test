@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('type');//for dogovor, for payment
             $table->string('mime_type');
             $table->unsignedInteger('size');
-            $table->foreignIdFor(\App\Models\Payment::class)->nullable();
+            $table->foreignId('transaction_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Lead;
 use App\Models\Leads;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;

@@ -2,10 +2,17 @@
 
 namespace App\Providers\Filament;
 
+use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
+use Filament\Navigation\NavigationBuilder;
+use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
+use Filament\Navigation\NavigationManager;
 use Filament\Pages;
+use Filament\Pages\Auth\EditProfile;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -31,17 +38,42 @@ class AdminPanelProvider extends PanelProvider
             ->profile()
             ->passwordReset()
             ->emailVerification()
+            ->brandLogo(asset('logo.png'))
             ->colors([
                 'primary' => Color::Red,
             ])
+            ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
+            ->brandName('Init')
+            ->brandLogoHeight('50px')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
             ])
+//            ->userMenuItems([
+//                'profile' => MenuItem::make()->url(fn (): string => EditProfile::getUrl())
+//            ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
+            ])
+            ->navigationGroups([
+                NavigationGroup::make()
+                        ->label('Настройка')
+                        ->icon('heroicon-o-cog-6-tooth')
+                        ->collapsed(),
+                NavigationGroup::make()
+                    ->label('Задачи и проекты')
+                    ->icon('heroicon-o-rectangle-stack')
+                    ->collapsed(),
+                NavigationGroup::make()
+                    ->label('Документы и отчеты')
+                    ->icon('heroicon-o-document-text')
+                    ->collapsed(),
+                NavigationGroup::make()
+                    ->label('Платижи и счета')
+                    ->icon('heroicon-o-currency-dollar')
+                    ->collapsed(),
             ])
             ->middleware([
                 EncryptCookies::class,
