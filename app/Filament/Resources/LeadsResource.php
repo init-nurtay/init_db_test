@@ -81,16 +81,6 @@ class LeadsResource extends Resource
                     ]),
                 ])->collapsible()
                     ->visible(fn($record) => $record->comments->isNotEmpty()),
-//                Tables\Columns\TextColumn::make('created_at')
-//                    ->label('Дата создания')
-//                    ->dateTime()
-//                    ->sortable()
-//                    ->toggleable(isToggledHiddenByDefault: true),
-//                Tables\Columns\TextColumn::make('updated_at')
-//                    ->label('Дата обновления')
-//                    ->dateTime()
-//                    ->sortable()
-//                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('status')
