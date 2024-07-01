@@ -13,18 +13,14 @@ use Filament\Tables\Columns\Layout\Panel;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class LeadsResource extends Resource
 {
     protected static ?string $model = Leads::class;
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 0;
     protected static ?string $navigationIcon = 'heroicon-o-phone';
 
     protected static ?string $navigationLabel = 'Лиды';
-
-
 
 
     public static function form(Form $form): Form
@@ -46,12 +42,11 @@ class LeadsResource extends Resource
                     ->label('Email'),
                 Forms\Components\Select::make('status')
                     ->options([
-                        'Новый' => 'Новый',
-                        'Связались' => 'Связались',
-                        'Квалифицирован' => 'Квалифицирован',
-                        'Неквалифицирован' => 'Неквалифицирован',
-                        'Впроцессе' => 'Впроцессе',
-                        'Потерян' => 'Потерян',
+                        'new' => 'warning',
+                        'closed' => 'primary',
+                        'completed' => 'success',
+                        'in_progress' => 'info',
+                        'frozen' => 'info',
                     ])
                     ->label('Статус'),
                 Forms\Components\Textarea::make('comments.message')
@@ -73,11 +68,11 @@ class LeadsResource extends Resource
                     ->label('Имя')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('status')
+                Tables\Columns\TextColumn::make('status_label_in_russian')
                     ->label('Статус')
                     ->searchable()
                     ->badge()
-                    ->color(fn ($record) => $record->getStatusColor()),
+                    ->color(fn (Leads $record) => $record->getStatusColor()),
                 Panel::make([
                     Stack::make([
                         Tables\Columns\TextColumn::make('comments.message')
@@ -85,25 +80,34 @@ class LeadsResource extends Resource
                             ->icon('heroicon-o-chat-bubble-bottom-center-text'),
                     ]),
                 ])->collapsible()
-                    ->visible(fn ($record) => $record->comments->isNotEmpty()),
-            ])
-            ->contentGrid([
-                'xl' => 2,
+                    ->visible(fn($record) => $record->comments->isNotEmpty()),
+//                Tables\Columns\TextColumn::make('created_at')
+//                    ->label('Дата создания')
+//                    ->dateTime()
+//                    ->sortable()
+//                    ->toggleable(isToggledHiddenByDefault: true),
+//                Tables\Columns\TextColumn::make('updated_at')
+//                    ->label('Дата обновления')
+//                    ->dateTime()
+//                    ->sortable()
+//                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('status')
                     ->label('Статус')
-                    ->options([
-                        'Новый' => 'Новый',
-                        'Связались' => 'Связались',
-                        'Квалифицирован' => 'Квалифицирован',
-                        'Неквалифицирован' => 'Неквалифицирован',
-                        'Впроцессе' => 'Впроцессе',
-                        'Потерян' => 'Потерян',
-                    ]),
+                    ->options(Status::getRussianLabels()),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\Action::make('Completed')
+                        ->label('Завершить')
+                        ->requiresConfirmation()
+                        ->hidden(fn (Leads $record) => $record->status == 'успешно')
+                        ->icon('heroicon-o-check-badge')
+                        ->action(fn (Leads $record) => $record->update(['status' => 'успешно'])),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -115,7 +119,7 @@ class LeadsResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+
         ];
     }
 
@@ -132,6 +136,7 @@ class LeadsResource extends Resource
     {
         return self::getModel()::count();
     }
+
     public static function getPluralLabel(): string
     {
         return 'Лиды';

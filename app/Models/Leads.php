@@ -17,17 +17,20 @@ class Leads extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-
+    public function getStatusLabelInRussianAttribute()
+    {
+        return Status::getRussianLabels()[$this->status];
+    }
 
     public function getStatusColor()
     {
         return match ($this->status) {
-            'Новый' => 'primary',
-            'Связались' => 'info',
-            'Квалифицирован' => 'warning',
-            'Неквалифицирован' => 'success',
-            'Впроцессе' => 'secondary',
-            'Потерян' => 'danger',
+            'new' => 'warning',
+            'closed' => 'primary',
+            'completed' => 'success',
+            'in_progress' => 'info',
+            'frozen' => 'info',
+            default => 'secondary',
         };
     }
 }
