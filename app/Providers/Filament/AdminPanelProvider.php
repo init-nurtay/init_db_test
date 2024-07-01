@@ -2,20 +2,15 @@
 
 namespace App\Providers\Filament;
 
-use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
+use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Navigation\MenuItem;
-use Filament\Navigation\NavigationBuilder;
-use Filament\Navigation\NavigationGroup;
-use Filament\Navigation\NavigationItem;
-use Filament\Navigation\NavigationManager;
 use Filament\Pages;
-use Filament\Pages\Auth\EditProfile;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\FontFamily;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -32,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('init')
-            ->path('/')
+            ->path('/admin')
             ->login()
             ->spa()
             ->profile()
@@ -40,16 +35,18 @@ class AdminPanelProvider extends PanelProvider
             ->emailVerification()
             ->brandLogo(asset('logo.png'))
             ->colors([
-                'primary' => Color::Red,
+                'primary' => '#ff1515',
             ])
-            ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
             ->brandName('Init')
             ->brandLogoHeight('50px')
+            ->favicon(asset('logo.png'))
+
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
             ])
+            ->sidebarCollapsibleOnDesktop()
 //            ->userMenuItems([
 //                'profile' => MenuItem::make()->url(fn (): string => EditProfile::getUrl())
 //            ])
@@ -57,24 +54,25 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
             ])
-            ->navigationGroups([
-                NavigationGroup::make()
-                        ->label('Настройка')
-                        ->icon('heroicon-o-cog-6-tooth')
-                        ->collapsed(),
-                NavigationGroup::make()
-                    ->label('Задачи и проекты')
-                    ->icon('heroicon-o-rectangle-stack')
-                    ->collapsed(),
-                NavigationGroup::make()
-                    ->label('Документы и отчеты')
-                    ->icon('heroicon-o-document-text')
-                    ->collapsed(),
-                NavigationGroup::make()
-                    ->label('Платижи и счета')
-                    ->icon('heroicon-o-currency-dollar')
-                    ->collapsed(),
-            ])
+            ->font(
+                'Gilroy',
+            )
+//            ->navigationGroups([
+//                NavigationGroup::make()
+//                        ->label('Настройка')
+//                        ->icon('heroicon-o-cog-6-tooth'),
+//                NavigationGroup::make()
+//                    ->label('Задачи и проекты')
+//                    ->icon('heroicon-o-rectangle-stack'),
+//                NavigationGroup::make()
+//                    ->label('Документы и отчеты')
+//                    ->icon('heroicon-o-document-text')
+//                    ->collapsed(),
+//                NavigationGroup::make()
+//                    ->label('Плаижи и счета')
+//                    ->icon('heroicon-o-currency-dollar')
+//                    ->collapsed(),
+//            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -88,7 +86,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-
-            ]);
+            ])
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+            ])
+            ->defaultThemeMode(ThemeMode::Light);
     }
 }

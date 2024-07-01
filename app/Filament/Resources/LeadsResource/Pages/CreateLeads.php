@@ -9,4 +9,5 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateLeads extends CreateRecord
 {
     protected static string $resource = LeadsResource::class;
+
 }
