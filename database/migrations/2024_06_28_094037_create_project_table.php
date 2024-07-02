@@ -23,6 +23,8 @@ return new class extends Migration
             $table->foreignId('lead_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamp('started_at')->nullable();
             $table->timestamp('ended_at')->nullable();
+            $table->text('comment')->nullable();
+
             $table->foreignId('country_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });

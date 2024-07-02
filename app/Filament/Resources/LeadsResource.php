@@ -43,7 +43,7 @@ class LeadsResource extends Resource
                 Forms\Components\Select::make('status')
                     ->options(Status::getRussianLabels())
                     ->label('Статус'),
-                Forms\Components\Textarea::make('comments.message')
+                Forms\Components\Textarea::make('comment')
                     ->label('Комментарий')
                     ->placeholder('Введите комментарий')
                     ->rows(3),
@@ -68,13 +68,8 @@ class LeadsResource extends Resource
                     ->badge()
                     ->color(fn (Leads $record) => $record->getStatusColor()),
                 Panel::make([
-                    Stack::make([
-                        Tables\Columns\TextInputColumn::make('comments.message')
-                            ->label('Комментарий')
-                    ]),
-                ])
-                    ->collapsible()
-                    ->visible(fn($record) => $record->comments->isNotEmpty()),
+                        Tables\Columns\TextInputColumn::make('comment')->columnSpan(6),
+                ])->collapsible(),
             ])
             ->filters([
                 SelectFilter::make('status')

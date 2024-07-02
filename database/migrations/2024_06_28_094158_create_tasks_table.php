@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('priority')->nullable();
             $table->foreignId('project_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamp('started_at')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamp('ended_at')->nullable();
             $table->timestamps();
         });
