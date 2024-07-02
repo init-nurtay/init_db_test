@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use App\Models\Projects;
 use App\Models\Task;
 use Filament\Pages\Page;
+use Livewire\Component;
 
 class TaskProjectPage extends Page
 {

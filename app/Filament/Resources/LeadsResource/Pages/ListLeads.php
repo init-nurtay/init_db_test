@@ -16,4 +16,9 @@ class ListLeads extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+//    protected function getTableContent(): string
+//    {
+//        return view('livewire.list-leads',['table' => $this->table->render()]);
+//    }
 }
