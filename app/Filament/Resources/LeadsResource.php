@@ -41,13 +41,7 @@ class LeadsResource extends Resource
                     ->email()
                     ->label('Email'),
                 Forms\Components\Select::make('status')
-                    ->options([
-                        'new' => 'warning',
-                        'closed' => 'primary',
-                        'completed' => 'success',
-                        'in_progress' => 'info',
-                        'frozen' => 'info',
-                    ])
+                    ->options(Status::getRussianLabels())
                     ->label('Статус'),
                 Forms\Components\Textarea::make('comments.message')
                     ->label('Комментарий')
@@ -75,11 +69,11 @@ class LeadsResource extends Resource
                     ->color(fn (Leads $record) => $record->getStatusColor()),
                 Panel::make([
                     Stack::make([
-                        Tables\Columns\TextColumn::make('comments.message')
+                        Tables\Columns\TextInputColumn::make('comments.message')
                             ->label('Комментарий')
-                            ->icon('heroicon-o-chat-bubble-bottom-center-text'),
                     ]),
-                ])->collapsible()
+                ])
+                    ->collapsible()
                     ->visible(fn($record) => $record->comments->isNotEmpty()),
             ])
             ->filters([
@@ -94,9 +88,9 @@ class LeadsResource extends Resource
                     Tables\Actions\Action::make('Completed')
                         ->label('Завершить')
                         ->requiresConfirmation()
-                        ->hidden(fn (Leads $record) => $record->status == 'успешно')
+                        ->hidden(fn (Leads $record) => $record->status == 'completed')
                         ->icon('heroicon-o-check-badge')
-                        ->action(fn (Leads $record) => $record->update(['status' => 'успешно'])),
+                        ->action(fn (Leads $record) => $record->update(['status' => 'completed'])),
                 ]),
             ])
             ->bulkActions([
