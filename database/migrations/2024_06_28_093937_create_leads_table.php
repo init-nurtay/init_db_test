@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->text('phone');
             $table->string('name')->nullable();
             $table->string('email')->nullable();
+            $table->text('comment')->nullable();
             $table->string('status')->default('new'); //New, Contacted, Qualified, Unqualified,In Progress,Lost,Completed
             $table->timestamps();
         });

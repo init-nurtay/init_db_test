@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 class Leads extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'phone', 'email', 'status'];
+    protected $fillable = ['name', 'phone', 'email', 'status','comment'];
 
-
-    public function comments()
-    {
-        return $this->morphMany(Comment::class, 'commentable');
-    }
+//
+//    public function comments()
+//    {
+//        return $this->morphMany(Comment::class, 'commentable');
+//    }
 
     public function getStatusLabelInRussianAttribute()
     {
