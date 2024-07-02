@@ -21,4 +21,9 @@ class ListLeads extends ListRecords
 //    {
 //        return view('livewire.list-leads',['table' => $this->table->render()]);
 //    }
+
+//    public function getTableSortColumn(): ?string
+//    {
+//        return 'phone';
+//    }
 }

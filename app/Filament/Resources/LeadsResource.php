@@ -13,7 +13,6 @@ use Filament\Tables\Columns\Layout\Panel;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-
 class LeadsResource extends Resource
 {
     protected static ?string $model = Leads::class;
@@ -54,21 +53,26 @@ class LeadsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('phone')
-                    ->label('Телефон')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('name')
-                    ->label('Имя')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('status_label_in_russian')
-                    ->label('Статус')
-                    ->searchable()
-                    ->badge()
-                    ->color(fn (Leads $record) => $record->getStatusColor()),
+                Tables\Columns\Layout\Split::make([
+                    Tables\Columns\TextColumn::make('phone')
+                        ->label('Телефон')
+                        ->searchable()
+                        ->sortable(),
+                    Tables\Columns\TextColumn::make('name')
+                        ->label('Имя')
+                        ->searchable()
+                        ->sortable(),
+                    Tables\Columns\TextColumn::make('status_label_in_russian')
+                        ->label('Статус')
+                        ->searchable()
+                        ->badge()
+                        ->color(fn(Leads $record) => $record->getStatusColor()),
+                ]),
                 Panel::make([
-                        Tables\Columns\TextInputColumn::make('comment')->columnSpan(6),
+                    Stack::make([
+                        Tables\Columns\TextInputColumn::make('comment')
+                            ->label('Комментарий')
+                    ]),
                 ])->collapsible(),
             ])
             ->filters([
@@ -83,16 +87,17 @@ class LeadsResource extends Resource
                     Tables\Actions\Action::make('Completed')
                         ->label('Завершить')
                         ->requiresConfirmation()
-                        ->hidden(fn (Leads $record) => $record->status == 'completed')
+                        ->hidden(fn(Leads $record) => $record->status == 'completed')
                         ->icon('heroicon-o-check-badge')
-                        ->action(fn (Leads $record) => $record->update(['status' => 'completed'])),
+                        ->action(fn(Leads $record) => $record->update(['status' => 'completed'])),
                 ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->poll('1s');
     }
 
     public static function getRelations(): array
@@ -120,4 +125,6 @@ class LeadsResource extends Resource
     {
         return 'Лиды';
     }
+
+
 }
