@@ -74,7 +74,7 @@ class LeadsResource extends Resource
                     ]),
                 ])
                     ->collapsible()
-                    ->visible(fn($record) => $record->comments->isNotEmpty()),
+                    ->visible(fn ($record) => $record->comments->isNotEmpty()),
             ])
             ->filters([
                 SelectFilter::make('status')
@@ -102,9 +102,7 @@ class LeadsResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-
-        ];
+        return [];
     }
 
     public static function getPages(): array
