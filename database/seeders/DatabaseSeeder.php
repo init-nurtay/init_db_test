@@ -7,6 +7,7 @@ use App\Models\Leads;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,21 +16,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        User::create([
-//            'name' => 'Admin',
-//            'email' => 'admin@admin.com',
-//            'password' => bcrypt('password'),
-//        ]);
-//        Leads::factory(10)->create();
-//        $this->call([
-//            CountrySeeder::class,
-//            CitySeeder::class,
-//            AddressSeeder::class,
-//        ]);
-
-        $lead = Leads::first();
-        $lead->comments()->create([
-            'message' => 'First comment',
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('password'),
         ]);
+
+        Leads::factory(10)->create();
+
+        $this->call([
+            CountrySeeder::class,
+            CitySeeder::class,
+            AddressSeeder::class,
+        ]);
+
+        // $lead = Leads::first();
+        // $lead->comments()->create([
+        //     'message' => 'First comment',
+        // ]);
     }
 }

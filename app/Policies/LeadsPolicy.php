@@ -63,7 +63,7 @@ class LeadsPolicy
      */
     public function forceDelete(User $user, Leads $leads): bool
     {
-        return $user->can('force_delete_leads');
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -71,7 +71,7 @@ class LeadsPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_leads');
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
@@ -79,7 +79,7 @@ class LeadsPolicy
      */
     public function restore(User $user, Leads $leads): bool
     {
-        return $user->can('restore_leads');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class LeadsPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_leads');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class LeadsPolicy
      */
     public function replicate(User $user, Leads $leads): bool
     {
-        return $user->can('replicate_leads');
+        return $user->can('{{ Replicate }}');
     }
 
     /**

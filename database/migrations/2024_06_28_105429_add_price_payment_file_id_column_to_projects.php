@@ -12,12 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->foreignId('price_payment_file_id')->constrained('payment_file')->nullOnDelete();
+            $table->foreignId('price_payment_file_id')->nullable()->constrained('payment_files')->nullOnDelete();
         });
     }
 
     /**
      * Reverse the migrations.
      */
-
 };
