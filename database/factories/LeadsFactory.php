@@ -17,13 +17,23 @@ class LeadsFactory extends Factory
     public function definition(): array
     {
         return [
-'name' => fake()->name(),
-'email' => fake()->email(),
-'company' => fake()->company(),
-'phone' => fake()->phoneNumber(),
-'comment' => fake(),
-'source' => fake(),
-'stage' => fake()->randomElement(['new', 'contacted', 'qualified', 'unqualified', 'in_progress', 'lost', 'completed'])
+            'name' => fake()->name(),
+            'email' => fake()->email(),
+            'company' => fake()->company(),
+            'phone' => fake()->phoneNumber(),
+            'comment' => fake(),
+            'source' => fake(),
+            'stage' => fake()->randomElement([
+                'new',
+                'in_progress',
+                'commercial_offer',
+                'meeting',
+                'document_preparation',
+                'final_payment',
+                'act_of_completed_work',
+                'thanks_letter',
+                'rejected'
+            ])
         ];
     }
 }
