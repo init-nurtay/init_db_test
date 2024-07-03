@@ -1,17 +1,13 @@
 <?php
 
-use App\Events\LeadsAdded;
-use App\Livewire\RealTimeData;
-use App\Models\Leads;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LeadController;
+use App\Models\Lead;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/data', RealTimeData::class);
-
-Route::get('/lead/new/{name}', function (string $name) {
-    $lead = Leads::create([
-        'phone'  => $name,
-    ]);
-    LeadsAdded::dispatch($lead);
-
-    return 'ok';
+Route::get('/',)->name('leads.index');
+Route::view('/', 'welcome');
+Route::get('/admin/dashboard',DashboardController::class)->name('admin.dashboard');
+Route::as('admin.')->prefix('admin')->group(function (){
+    Route::resource('/leads',LeadController::class);
 });

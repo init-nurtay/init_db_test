@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Lead;
-use App\Models\Leads;
+use App\Models\Project;
+use App\Models\Task;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,11 +21,17 @@ class DatabaseSeeder extends Seeder
 //           'password' => bcrypt('password'),
 //       ]);
 //       Leads::factory(4)->create();
-User::create([
-    'name' => 'manager',
-    'email' => 'manager@init.red',
-    'password'  => bcrypt('password'),
+//User::create([
+//    'name' => 'manager',
+//    'email' => 'manager@init.red',
+//    'password'  => bcrypt('password'),
+//]);
+Task::create([
+    'name' => 'Task 1',
 ]);
 
+Project::create([
+    'name' => 'project 1',
+]);
     }
 }

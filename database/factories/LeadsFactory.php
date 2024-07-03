@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Leads>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Lead>
  */
 class LeadsFactory extends Factory
 {
@@ -17,9 +17,13 @@ class LeadsFactory extends Factory
     public function definition(): array
     {
         return [
-            'phone' => fake()->phoneNumber(),
-            'name' => fake()->name(),
-            'email' => fake()->email
+'name' => fake()->name(),
+'email' => fake()->email(),
+'company' => fake()->company(),
+'phone' => fake()->phoneNumber(),
+'comment' => fake(),
+'source' => fake(),
+'stage' => fake()->randomElement(['new', 'contacted', 'qualified', 'unqualified', 'in_progress', 'lost', 'completed'])
         ];
     }
 }

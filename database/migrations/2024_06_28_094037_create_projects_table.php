@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Lead;
+use App\Models\PaymentFile;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,16 +13,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable();
+            $table->text('description')->nullable();//
+            $table->string('type')->nullable();
             $table->string('status')->nullable();
-            $table->string('priority')->nullable();
-            $table->foreignId('project_id')->nullable()->constrained()->nullOnDelete();
+            $table->text('tech_file')->nullable();
+            $table->text('comment')->nullable();
+
+            $table->foreignId('lead_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('country_id')->nullable()->constrained()->nullOnDelete();
+
             $table->timestamp('started_at')->nullable();
             $table->timestamp('ended_at')->nullable();
-            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('projects');
     }
 };

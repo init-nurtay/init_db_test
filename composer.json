@@ -10,8 +10,6 @@
     "require": {
         "php": "^8.2",
         "bensampo/laravel-enum": "^6.11",
-        "bezhansalleh/filament-shield": "^3.2",
-        "filament/filament": "^3.2",
         "laravel/framework": "^11.9",
         "laravel/reverb": "@beta",
         "laravel/sanctum": "^4.0",

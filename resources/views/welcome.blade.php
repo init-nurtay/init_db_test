@@ -46,19 +46,7 @@
     }
 </style>
 <body class="antialiased font-sans">
-    <form action="{{route('leads.store')}}"
-          method="post">
-        @csrf
-        @method('post')
-        <div class="input-container">
-            <input name="phone"
-                   type="tel"
-                   placeholder="Enter phone number">
-            <button>
-                Send
-            </button>
-        </div>
-    </form>
+<a href="{{route('admin.dashboard')}}">to admin panel</a>
 
 </body>
 </html>

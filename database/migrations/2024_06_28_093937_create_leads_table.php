@@ -12,11 +12,13 @@ return new class extends Migration {
     {
         Schema::create('leads', function (Blueprint $table) {
             $table->id();
-            $table->text('phone');
             $table->string('name')->nullable();
             $table->string('email')->nullable();
+            $table->string('company')->nullable();
+            $table->text('phone');
             $table->text('comment')->nullable();
-            $table->string('status')->default('new'); //New, Contacted, Qualified, Unqualified,In Progress,Lost,Completed
+            $table->string('source')->nullable();
+            $table->string('stage')->default('new'); //new, in processing, Commercial offer, meeting, preparation of documents
             $table->timestamps();
         });
     }
