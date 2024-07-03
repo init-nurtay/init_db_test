@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Lead>
  */
-class LeadsFactory extends Factory
+class LeadFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,8 +21,6 @@ class LeadsFactory extends Factory
             'email' => fake()->email(),
             'company' => fake()->company(),
             'phone' => fake()->phoneNumber(),
-            'comment' => fake(),
-            'source' => fake(),
             'stage' => fake()->randomElement([
                 'new',
                 'in_progress',
