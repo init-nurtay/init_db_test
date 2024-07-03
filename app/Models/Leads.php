@@ -14,13 +14,13 @@ class Leads extends Model
 {
     use HasFactory, BroadcastsEvents;
 
-    protected $fillable = ['name', 'phone', 'email', 'status'];
+    protected $fillable = ['name', 'phone', 'email', 'status','comment'];
 
 
-    public function comments()
-    {
-        return $this->morphMany(Comment::class, 'commentable');
-    }
+//    public function comments()
+//    {
+//        return $this->morphMany(Comment::class, 'commentable');
+//    }
 
     public function getStatusLabelInRussianAttribute()
     {
@@ -39,25 +39,5 @@ class Leads extends Model
         };
     }
 
-    public function broadcastOn(string $event)
-    {
-        return [
-            new Channel('leads.1'),
-        ];
-    }
 
-    public function broadcastAs(string $event): string|null
-    {
-        return match ($event) {
-            'created' => 'leads.created',
-            default => null,
-        };
-    }
-
-    /**
-     * @param array<string,string> $array
-     */
-    public static function create(array $array)
-    {
-    }
 }

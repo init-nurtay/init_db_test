@@ -17,6 +17,7 @@
   <footer>
     </footer>
 
-  @livewireScripts </body>
+  @livewireScripts
+</body>
 </html>
 

@@ -3,17 +3,16 @@
 namespace App\Livewire;
 
 use App\Models\Leads;
-use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class RealTimeData extends Component
 {
-    public $data;
+    public  $data;
 
     public function mount()
     {
-        $this->data = Leads::all();
+        $this->data = Leads::query();
     }
 
     #[On('updateData')]
@@ -25,6 +24,6 @@ class RealTimeData extends Component
     public function render()
     {
         return view('livewire.real-time-data')
-            ->layout('layouts.view');
+            ->layout('layouts.app');
     }
 }
