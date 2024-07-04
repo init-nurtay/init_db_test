@@ -13,14 +13,17 @@ class ClientController extends Controller
     {
         $orderBy = $request->input('orderBy', 'created_at');
         $orderSort = $request->input('orderSort', 'asc');
+        $query = $request->input('name');
 
         if (!in_array($orderSort, ['asc', 'desc'])) {
             $orderSort = 'asc';
         }
 
         $clinets = Client::query()
+            ->where($orderBy, 'like', $query)
             ->with('address')
             ->orderBy($orderBy, $orderSort)
+            ->simplePaginate(20)
             ->get();
 
         return view('admin.clients.index', compact('clients'));

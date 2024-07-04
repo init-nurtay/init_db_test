@@ -16,18 +16,21 @@ class ProjectController extends Controller
 
     public function index(Request $request)
     {
-        
+
         $orderBy = $request->input('orderBy', 'started_at');
         $orderSort = $request->input('orderSort', 'asc');
-
+        $query = $request->input('name');
         if (!in_array($orderSort, ['asc', 'desc'])) {
             $orderSort = 'asc'; // or throw an exception or set to a default sort order
         }
         $clients = Client::all();
         $projects = Project::query()
             ->with(['client', 'country'])
+            ->where($orderBy, 'like', $query)
             ->orderBy($orderBy, $orderSort)
+            ->simplePaginate(20)
             ->get();
+
         return view('admin.projects.index', compact('projects', 'clients'));
     }
 

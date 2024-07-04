@@ -12,13 +12,14 @@ class LeadController extends Controller
     {
         $orderBy = $request->input('orderBy', 'created_at');
         $orderSort = $request->input('orderSort', 'asc');
-
+        $query = $request->input('name');
         if (!in_array($orderSort, ['asc', 'desc'])) {
-            $orderSort = 'asc';  
+            $orderSort = 'asc';
         }
 
-        $leads = Lead::query()
+        $leads = Lead::query()->where($orderBy, 'like', $query)
             ->orderBy($orderBy, $orderSort)
+            ->simplePaginate(20)
             ->get();
         return view('admin.leads.index', compact('leads'));
     }
