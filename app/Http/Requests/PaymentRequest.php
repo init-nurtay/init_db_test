@@ -22,7 +22,15 @@ class PaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'string',
+            'instruction' => '',
+            'comment' => '',
+            'payed_at' => 'datetime',
+
+            'payment_type' => '',
+            'operation_type' => '',
+            'status' => 'in:pending, paid, cancelled',
+            'amount' => 'decimal'
         ];
     }
 }

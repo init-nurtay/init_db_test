@@ -16,15 +16,16 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable();//
+            $table->text('description')->nullable(); //
             $table->string('type')->nullable();
             $table->string('status')->nullable();
-            $table->text('tech_file')->nullable();
+            $table->foreignId('client_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('document_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('server_domain')->nullable(); //
+            $table->timestamp('domain_expires_at')->nullable();
+            $table->string('icon')->nullable();
+            $table->string('git_url')->nullable();
             $table->text('comment')->nullable();
-
-            $table->foreignId('lead_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('country_id')->nullable()->constrained()->nullOnDelete();
-
             $table->timestamp('started_at')->nullable();
             $table->timestamp('ended_at')->nullable();
             $table->timestamps();

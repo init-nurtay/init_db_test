@@ -22,6 +22,13 @@ class LeadRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => 'string',
+            'stage' => 'string',
+            'email' => 'email:rfc',
+            'company' => 'string',
+            'comment' => 'string',
+            'phone' => 'string',
+            'source' => 'string'
         ];
     }
 }
