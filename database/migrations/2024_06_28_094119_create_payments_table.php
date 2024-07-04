@@ -18,8 +18,8 @@ return new class extends Migration
             $table->text('comment')->nullable();//comment
             $table->timestamp('payment_of_date_at')->nullable(); //date of payment
 
-            $table->string('type_payment')->nullable();//seo,hosting
-            $table->string('type_operation')->nullable();//income, expense
+            $table->string('payment_type')->nullable();//seo,hosting
+            $table->string('operation_type')->nullable();//income, expense
             $table->string('status')->nullable();//pending, completed
             $table->decimal('amount')->nullable();//amount
 

@@ -19,9 +19,6 @@ return new class extends Migration
             $table->text('description')->nullable(); //
             $table->string('status')->nullable();
 
-            $table->foreignId('client_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('document_id')->nullable()->constrained()->nullOnDelete();
-
             $table->string('server_domain')->nullable(); //
             $table->timestamp('domain_expires_at')->nullable();
 
@@ -30,6 +27,11 @@ return new class extends Migration
             $table->string('git_url')->nullable();
 
             $table->text('comment')->nullable();
+
+            $table->foreignId('lead_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('client_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('document_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('country_id')->nullable()->constrained()->nullOnDelete();
 
             $table->timestamp('started_at')->nullable();
             $table->timestamp('ended_at')->nullable();

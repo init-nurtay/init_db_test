@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 class DocumentController extends Controller
 {
     public function index(){
-        $documents = Document::query()->get();
+        $documents = Document::query()
+            ->with(['project', 'client'])
+            ->get();
         return view('admin.documents.index', compact('documents'));
     }
 

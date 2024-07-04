@@ -9,7 +9,9 @@ use App\Services\ClientService;
 class ClientController extends Controller
 {
     public function index(){
-        $clients = Client::query()->get();
+        $clients = Client::query()
+            ->with('address')
+            ->get();
         return view('admin.clients.index', compact('clients'));
     }
 
