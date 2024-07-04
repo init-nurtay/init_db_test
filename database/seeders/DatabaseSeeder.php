@@ -15,10 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
-        $this->call([
-            LeadSeeder::class,
-        ]);
-
+        Lead::factory()->create();
     }
 }

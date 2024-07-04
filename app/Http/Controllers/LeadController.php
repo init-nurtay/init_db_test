@@ -4,33 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LeadRequest;
 use App\Models\Lead;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class LeadController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         $leads = Lead::query()->get();
-        return view('admin.leads.index',compact('leads'));
+        return view('admin.leads.index', compact('leads'));
     }
 
-    public function store(LeadRequest $request) {
+    public function store(LeadRequest $request)
+    {
         Lead::create($request->validated());
 
-        return redirect()->route('admin.leads.index')->with('success','Lead created successfully');
+        return redirect()->route('admin.leads.index')->with('success', 'Lead created successfully');
     }
 
-    public function update(LeadRequest $request, Lead $lead) {
+    public function update(LeadRequest $request, Lead $lead)
+    {
         $lead->update($request->validated());
-        return redirect()->route('admin.leads.index')->with('success','Lead updated successfully');
+        return redirect()->route('admin.leads.index')->with('success', 'Lead updated successfully');
     }
 
-    public function destroy(Lead $lead) {
+    public function destroy(Lead $lead)
+    {
 
         $lead->delete();
 
-        return redirect()->route('admin.leads.index')->with('success','Lead deleted successfully');
+        return redirect()->route('admin.leads.index')->with('success', 'Lead deleted successfully');
     }
 }

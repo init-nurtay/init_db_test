@@ -11,7 +11,6 @@
 
 <table class="table">
     <thead>
-    <tr>
         <th>id</th>
         <th>name</th>
         <th>email</th>
