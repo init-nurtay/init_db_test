@@ -14,10 +14,11 @@ class DocumentController extends Controller
         $orderSort = $request->input('orderSort', 'asc');
 
         if (!in_array($orderSort, ['asc', 'desc'])) {
-            $orderSort = 'asc';  
+            $orderSort = 'asc';
         }
 
         $documents = Document::query()
+            ->with(['project', 'client'])
             ->orderBy($orderBy, $orderSort)
             ->get();
         return view('admin.documents.index', compact('documents'));
