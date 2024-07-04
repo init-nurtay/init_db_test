@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Log;
 class ProjectController extends Controller
 {
     public function index(){
-
         $projects = Project::query()->get();
         return view('admin.projects.index',compact('projects'));
     }

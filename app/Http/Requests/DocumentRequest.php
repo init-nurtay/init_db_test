@@ -22,14 +22,25 @@ class DocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type_document' => 'required|string|in:contract,conract application,additional agreement,invoice,certificate of completion,act of reconciliation,commercial offer',
+            'document_type' => 'required|string|in:contract,conract application,additional agreement,invoice,certificate of completion,act of reconciliation,commercial offer',
             'header' => 'required|string',
             'content' => 'required|string',
-            'project_id' => 'required|integer',
-            'identification_number' => 'string',
-            'client_id' => 'integer',
-            'agreement_number' => 'string',
-            'agreement_date_at' => 'timestamp',
+
+            'account_number' => 'string',
+            'account_created_at' => 'datetime',
+
+            'project_name' => 'required|string',
+            'identification_number' => 'number|size:12',
+            'company_name' => 'string',
+            'company_type' => 'string',
+            'address' => 'string',
+            'bank_name' => 'string',
+
+            'contract_number' => 'string',
+            'contract_date_at' => 'timestamp',
+
+            'day' => 'integer|between:1,31',
+            'email' => 'email:rfc'
         ];
     }
 }

@@ -25,10 +25,21 @@ class ProjectRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'string',
             'type' => 'string',
+            'client_id' => 'number',
+
+            'contract_number' => '',
+            'contract_created_at' => '',
+
+            'server_domain' => 'url',
+            'domain_expires_at' => 'datetime',
+            'server' => '',
+
             'status' => 'string|in:finished,static,seo,ours,archive,deleted',
-            'tech_file' => '',
-            'description' => 'string',
-            'description' => 'string',
+            'domain' => 'url',
+
+            'icon' => '',
+            'git_url' => 'url',
+            'started_at' => 'datetime'
 
         ];
     }
