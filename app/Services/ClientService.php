@@ -15,7 +15,8 @@ class ClientService
 
     public static function store(array $serviceData)
     {
-        $address_id = Address::create($serviceData);
+        $address = new Address();
+        $address_id = $address->fill($serviceData);
         $serviceData['address_id'] = $address_id;
 
         Client::create($serviceData);
