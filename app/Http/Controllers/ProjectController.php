@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LeadRequest;
 use App\Http\Requests\ProjectRequest;
+use App\Models\Client;
 use App\Models\Lead;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -22,11 +23,12 @@ class ProjectController extends Controller
         if (!in_array($orderSort, ['asc', 'desc'])) {
             $orderSort = 'asc'; // or throw an exception or set to a default sort order
         }
-
+        $clients = Client::all();
         $projects = Project::query()
+            ->with(['client', 'country'])
             ->orderBy($orderBy, $orderSort)
             ->get();
-        return view('admin.projects.index', compact('projects'));
+        return view('admin.projects.index', compact('projects', 'clients'));
     }
 
     public function store(ProjectRequest $request)

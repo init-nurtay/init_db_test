@@ -19,6 +19,7 @@ class ClientController extends Controller
         }
 
         $clinets = Client::query()
+            ->with('address')
             ->orderBy($orderBy, $orderSort)
             ->get();
 
