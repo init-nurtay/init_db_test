@@ -10,7 +10,6 @@ class LeadController extends Controller
 {
     public function index()
     {
-
         $leads = Lead::query()->get();
         return view('admin.leads.index', compact('leads'));
     }

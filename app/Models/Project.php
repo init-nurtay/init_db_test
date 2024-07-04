@@ -9,5 +9,13 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $guarded = [];
+
+    public function lead() {
+        return $this->hasOne(Lead::class);
+    }
+
+    public function country() {
+        return $this->hasOne(Country::class);
+    }
 }

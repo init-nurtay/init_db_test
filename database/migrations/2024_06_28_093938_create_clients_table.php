@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->string('type_organization')->nullable();//тип организации
+            $table->string('organization_type')->nullable();//тип организации
             $table->text('identification_number')->nullable();//номер идентификации
-            $table->string('name_organization');//название организации
-            $table->string('full_name');//полное имя
+            $table->string('organization_name');//название организации
+            $table->string('chief_full_name');//полное имя
             $table->string('agent_type')->nullable();//тип агента
 
 //            $table->string('bank_id')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('identification_code')->nullable();//код идентификации
             $table->text('beneficiary_code')->nullable();//код бенефициара
 
-            $table->foreignId('address_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('address_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
 use App\Models\Client;
+use App\Services\ClientService;
 
 class ClientController extends Controller
 {
@@ -13,13 +14,15 @@ class ClientController extends Controller
     }
 
     public function store(ClientRequest $request) {
-        Client::create($request->validated());
+        ClientService::store($request->validated());
 
         return redirect()->route('admin.clients.index')->with('success', 'Client created successfully');
     }
 
     public function update(ClientRequest $request, Client $client) {
-        $client->update($request->validated());
+        $clientService = new ClientService($client);
+        $clientService->update($request->validated());
+
         return redirect()->route('admin.clients.index')->with('success', 'Client updated successfully');
     }
 

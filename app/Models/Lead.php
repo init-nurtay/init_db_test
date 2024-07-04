@@ -22,10 +22,10 @@ class Lead extends Model
 //        return $this->morphMany(Comment::class, 'commentable');
 //    }
 
-    public function getStatusLabelInRussianAttribute()
-    {
-        return Status::getRussianLabels()[$this->status];
-    }
+    // public function getStatusLabelInRussianAttribute()
+    // {
+    //     return Status::getRussianLabels()[$this->status];
+    // }
 
     public function getStatusColor()
     {
@@ -38,6 +38,4 @@ class Lead extends Model
             default => 'secondary',
         };
     }
-
-
 }

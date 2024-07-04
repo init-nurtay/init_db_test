@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->string('type_document')->nullable();
+            $table->string('document_type')->nullable();
             $table->string('header')->nullable();
             $table->text('content')->nullable();
 
             $table->foreignId('client_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('project_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('agreement_number')->nullable();
-            $table->timestamp('agreement_date_at')->nullable();
+            $table->string('contract_number')->nullable();
+            $table->timestamp('contract_date_at')->nullable();
 
             $table->foreignId('service_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
