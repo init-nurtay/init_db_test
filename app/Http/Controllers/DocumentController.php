@@ -9,8 +9,17 @@ use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
-    public function index(){
-        $documents = Document::query()->get();
+    public function index(Request $request){
+        $orderBy = $request->input('orderBy', 'created_at');
+        $orderSort = $request->input('orderSort', 'asc');
+
+        if (!in_array($orderSort, ['asc', 'desc'])) {
+            $orderSort = 'asc';  
+        }
+
+        $documents = Document::query()
+            ->orderBy($orderBy, $orderSort)
+            ->get();
         return view('admin.documents.index', compact('documents'));
     }
 

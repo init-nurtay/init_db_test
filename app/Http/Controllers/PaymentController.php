@@ -8,8 +8,17 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    public function index(){
-        $payments = Payment::query()->get();
+    public function index(Request $request){
+        $orderBy = $request->input('orderBy', 'created_at');
+        $orderSort = $request->input('orderSort', 'asc');
+
+        if (!in_array($orderSort, ['asc', 'desc'])) {
+            $orderSort = 'asc';  
+        }
+
+        $payments = Payment::query()
+            ->orderBy($orderBy, $orderSort)
+            ->get();
         return view('admin.payments.index', compact('payments'));
     }
 

@@ -8,9 +8,18 @@ use Illuminate\Http\Request;
 
 class LeadController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $leads = Lead::query()->get();
+        $orderBy = $request->input('orderBy', 'created_at');
+        $orderSort = $request->input('orderSort', 'asc');
+
+        if (!in_array($orderSort, ['asc', 'desc'])) {
+            $orderSort = 'asc';  
+        }
+
+        $leads = Lead::query()
+            ->orderBy($orderBy, $orderSort)
+            ->get();
         return view('admin.leads.index', compact('leads'));
     }
 

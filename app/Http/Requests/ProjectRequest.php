@@ -40,7 +40,6 @@ class ProjectRequest extends FormRequest
             'icon' => '',
             'git_url' => 'url',
             'started_at' => 'datetime'
-
         ];
     }
 }
