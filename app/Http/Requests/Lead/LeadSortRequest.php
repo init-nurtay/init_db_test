@@ -23,7 +23,7 @@ class LeadSortRequest extends FormRequest
     {
         return [
             'orderBy'=>'nullable|string|in:id,name,email,company,phone,comment,source,stage,created_at',
-            'order'=>'nullable|string|in:asc,desc',
+            'orderSort'=>'nullable|string|in:asc,desc',
             'search'=>'nullable|string|max:255',
 
             'name' => 'nullable|string|max:255',

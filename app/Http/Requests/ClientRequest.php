@@ -11,7 +11,7 @@ class ClientRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,17 +22,17 @@ class ClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'organization_type' => 'string|in:ТОО, ИП, Физ. лицо, АО, УО',
-            'identification_number' => 'integer|size:12',
-            'organization_name' => 'string',
-            'chief_full_name' => 'string',
-            'agent_type' => 'string',
-            'bank_name' => 'string',
-            'identification_code' => 'string',
-            'beneficiary_code' => 'string',
-            'city' => 'string',
-            'address' => 'string',
-            'postal_code' => 'string'
+            'organization_type' => 'nullable|string',
+            'identification_number' => 'nullable|integer|size:12',
+            'organization_name' => 'nullable|string',
+            'chief_full_name' => 'nullable|string',
+            'agent_type' => 'nullable|string',
+            'bank_name' => 'nullable|string',
+            'identification_code' => 'nullable|string',
+            'beneficiary_code' => 'nullable|string',
+            'city' => 'nullable|string',
+            'address' => 'nullable|string',
+            'postal_code' => 'nullable|string'
         ];
     }
 }
