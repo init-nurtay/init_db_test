@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('server_domain')->nullable(); //
             $table->timestamp('domain_expires_at')->nullable();
 
-            $table->string('status')->nullable();
             $table->string('icon_path')->nullable();
             $table->string('git_url')->nullable();
 

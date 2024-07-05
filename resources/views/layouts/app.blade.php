@@ -25,7 +25,10 @@
                 <a class="nav-link" href="{{route('admin.leads.index')}}">Leads</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('admin.projects.index')}}">Users</a>
+                <a class="nav-link" href="{{route('admin.projects.index')}}">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.clients.index')}}">Clients</a>
             </li>
         </ul>
 
