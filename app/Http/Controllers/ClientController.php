@@ -19,7 +19,7 @@ class ClientController extends Controller
             $orderSort = 'asc';
         }
 
-        $clinets = Client::query()
+        $clients = Client::query()
             ->where($orderBy, 'like', $query)
             ->with('address')
             ->orderBy($orderBy, $orderSort)

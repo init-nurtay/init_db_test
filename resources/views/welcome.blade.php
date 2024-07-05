@@ -17,36 +17,8 @@
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<style>
-    .input-container {
-        display: flex;
-        align-items: center;
-        width: 300px;
-    }
-
-    .input-container input[type="tel"] {
-        flex: 1;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px 0 0 4px;
-    }
-
-    .input-container button {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-left: none;
-        background-color: #4CAF50;
-        color: white;
-        cursor: pointer;
-        border-radius: 0 4px 4px 0;
-    }
-
-    .input-container button:hover {
-        background-color: #45a049;
-    }
-</style>
-<body class="antialiased font-sans">
 <a href="{{route('admin.dashboard')}}">to admin panel</a>
+<a href="{{route('login')}}">To Login</a>
 
-</body>
+
 </html>

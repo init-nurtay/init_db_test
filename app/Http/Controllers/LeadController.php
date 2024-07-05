@@ -11,8 +11,8 @@ class LeadController extends Controller
     public function index(LeadRequest\LeadSortRequest $request) {
         $leads = Lead::query()
                 ->where('name','like','%'.$request->search.'%')
-                ->orderBy('name',$request->orderSort?? 'asc')
-                ->paginate(10);
+                ->orderBy('name',$request->orderSort ?? 'asc')
+                ->simplePaginate(10);
         return view('admin.leads.index',compact('leads'));
     }
 
