@@ -6,25 +6,15 @@ use App\Http\Requests\ClientRequest;
 use App\Models\Client;
 use App\Services\ClientService;
 use Illuminate\Http\Request;
+use Termwind\Components\Dd;
 
 class ClientController extends Controller
 {
     public function index(Request $request)
     {
-        $orderBy = $request->input('orderBy', 'created_at');
-        $orderSort = $request->input('orderSort', 'asc');
-        $query = $request->input('name');
-
-        if (!in_array($orderSort, ['asc', 'desc'])) {
-            $orderSort = 'asc';
-        }
-
-        $clinets = Client::query()
-            ->where($orderBy, 'like', $query)
+        $clients = Client::query()
             ->with('address')
-            ->orderBy($orderBy, $orderSort)
-            ->simplePaginate(20)
-            ->get();
+            ->paginate(10);
 
         return view('admin.clients.index', compact('clients'));
     }
@@ -38,6 +28,7 @@ class ClientController extends Controller
 
     public function update(ClientRequest $request, Client $client)
     {
+        \dd(1234);
         $clientService = new ClientService($client);
         $clientService->update($request->validated());
 

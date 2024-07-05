@@ -15,5 +15,5 @@ Route::as('admin.')->prefix('admin')->group(function (){
     Route::resource('/leads',LeadController::class);
     Route::resource('/documents',\App\Http\Controllers\DocumentController::class);
     Route::resource('/projects',\App\Http\Controllers\ProjectController::class);
-    Route::resource('/clients',\App\Http\Controllers\ClientController::class);
+   Route::resource('/clients',\App\Http\Controllers\ClientController::class);
 });
