@@ -2,46 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LeadRequest;
+use App\Http\Requests\Lead as LeadRequest;
 use App\Models\Lead;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LeadController extends Controller
 {
-    public function index(Request $request)
-    {
-        $orderBy = $request->input('orderBy', 'created_at');
-        $orderSort = $request->input('orderSort', 'asc');
-        $query = $request->input('name');
-        if (!in_array($orderSort, ['asc', 'desc'])) {
-            $orderSort = 'asc';
-        }
-
-        $leads = Lead::query()->where($orderBy, 'like', $query)
-            ->orderBy($orderBy, $orderSort)
-            ->simplePaginate(20)
-            ->get();
-        return view('admin.leads.index', compact('leads'));
+    public function index(LeadRequest\LeadSortRequest $request) {
+        $leads = Lead::query()
+                ->where('name','like','%'.$request->search.'%')
+                ->orderBy('name',$request->orderSort?? 'asc')
+                ->paginate(10);
+        return view('admin.leads.index',compact('leads'));
     }
 
-    public function store(LeadRequest $request)
-    {
+    public function store(LeadRequest\LeadRequest $request) {
         Lead::create($request->validated());
 
-        return redirect()->route('admin.leads.index')->with('success', 'Lead created successfully');
+        return redirect()->route('admin.leads.index')->with('success','Lead created successfully');
     }
 
-    public function update(LeadRequest $request, Lead $lead)
-    {
+    public function update(LeadRequest\LeadRequest $request, Lead $lead) {
         $lead->update($request->validated());
-        return redirect()->route('admin.leads.index')->with('success', 'Lead updated successfully');
+        return redirect()->route('admin.leads.index')->with('success','Lead updated successfully');
     }
 
-    public function destroy(Lead $lead)
-    {
+    public function destroy(Lead $lead) {
 
         $lead->delete();
 
-        return redirect()->route('admin.leads.index')->with('success', 'Lead deleted successfully');
+        return redirect()->route('admin.leads.index')->with('success','Lead deleted successfully');
     }
 }

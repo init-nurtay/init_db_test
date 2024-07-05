@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LeadRequest;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Client;
-use App\Models\Lead;
 use App\Models\Project;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {

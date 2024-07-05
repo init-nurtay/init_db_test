@@ -14,7 +14,15 @@ class Lead extends Model
 {
     use HasFactory, BroadcastsEvents;
 
-    protected $fillable = ['name', 'phone', 'email', 'status','comment'];
+    protected $fillable = [
+        'name',
+        'email',
+        'company',
+        'phone',
+        'comment',
+        'source',
+        'stage',
+        ];
 
 
 //    public function comments()

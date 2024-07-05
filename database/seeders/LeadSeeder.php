@@ -3,15 +3,13 @@
 namespace Database\Seeders;
 
 use App\Models\Lead;
-use App\Models\Project;
-use App\Models\Task;
-use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class LeadSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
     public function run(): void
     {

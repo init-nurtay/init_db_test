@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Lead;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -11,7 +11,7 @@ class LeadRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,13 +22,13 @@ class LeadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string',
-            'stage' => 'string',
-            'email' => 'email:rfc',
-            'company' => 'string',
-            'comment' => 'string',
-            'phone' => 'string',
-            'source' => 'string'
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'company' => 'required|string|max:255',
+            'phone' => 'required|string|max:20|regex:/^\+?[^a-zA-Z]{1,}$/',//example +1234567890
+            'comment' => 'required',
+            'source' => 'required|string|max:255',
+            'stage' => 'required|string|max:255'
         ];
     }
 }
