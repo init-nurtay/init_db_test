@@ -10,7 +10,7 @@ Route::view('/', 'welcome');
 Route::view('/login','auth.login')->name('login.form');
 Route::post('/login',[AuthController::class,'login'])->name('login');
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
-Route::middleware(['role:admin'])->as('admin.')->prefix('admin')->group(function (){
+Route::as('admin.')->prefix('admin')->group(function (){
     Route::get('/',function() {
         return to_route('admin.dashboard');
     });
